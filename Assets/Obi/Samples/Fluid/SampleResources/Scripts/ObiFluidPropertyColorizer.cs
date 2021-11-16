@@ -29,7 +29,7 @@ namespace Obi
 			for (int i = 0; i < emitter.solverIndices.Length; ++i)
             {
                 int k = emitter.solverIndices[i];
-                emitter.solver.colors[k] = grad.Evaluate(emitter.solver.userData[k][1]);
+                emitter.solver.colors[k] = grad.Evaluate(emitter.solver.userData[k][0]);
 			}
 		}
 	
