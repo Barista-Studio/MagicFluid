@@ -12,6 +12,7 @@ namespace Obi
 		void Awake()
         {
             GetComponent<ObiEmitter>().OnEmitParticle += Emitter_OnEmitParticle;
+
 		}
 
 		void Emitter_OnEmitParticle (ObiEmitter emitter, int particleIndex)
