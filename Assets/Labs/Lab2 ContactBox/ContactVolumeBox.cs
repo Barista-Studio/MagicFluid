@@ -12,6 +12,8 @@ public class ContactVolumeBox : MonoBehaviour
         var collider_mesh = GetComponent<MeshCollider>().sharedMesh;
         m_aabbBox = collider_mesh.bounds;
         solver = FindObjectOfType<ObiSolver>();
+
+        ObiEmitter e;
     }
 
     // Update is called once per frame
