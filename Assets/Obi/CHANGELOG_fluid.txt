@@ -1,6 +1,30 @@
 # Change Log
 All notable changes to “Obi - Advanced fluids for Unity” will be documented in this file.
 
+## [6.4]
+
+### Added
+- Support for configurable enter play mode (domain and scene reload disabling).
+- Support for in-editor hot reloading.
+
+### Changed
+- Introduced a job handle pool to avoid runtime allocation of handles by both Burst and Oni backends.
+- Constraint padding array in Burst solver has been turned into a member variable instead of allocating anew it every frame.
+- Collision and friction batches are pooled instead of allocated every frame.
+
+### Fixed
+- InvalidOperationException when performing certain spatial queries with jobs debugger enabled in the Burst backend.
+
+## [6.3]
+
+###Added
+- Built-in support for applying solver gravity in world-space.
+
+### Fixed
+- Collision filter settings weren't working correctly with ObiEmitters.
+- Slight reduction in solver memory allocation.
+- Object disposed exception when using contact callbacks with a non-visible solver.
+
 ## [6.2]
 
 #IMPORTANT: If updating from an older version, you’ll need to readjust collision filtering in your scenes.

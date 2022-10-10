@@ -86,16 +86,24 @@ namespace Obi
             var newCategory = EditorGUILayout.Popup("Collision category", ObiUtils.GetCategoryFromFilter(emitter.Filter), ObiUtils.categoryNames);
             if (EditorGUI.EndChangeCheck())
             {
-                Undo.RecordObject(emitter, "Set collision category");
-                emitter.Filter = ObiUtils.MakeFilter(ObiUtils.GetMaskFromFilter(emitter.Filter), newCategory);
+                foreach (ObiEmitter t in targets)
+                {
+                    Undo.RecordObject(t, "Set collision category");
+                    t.Filter = ObiUtils.MakeFilter(ObiUtils.GetMaskFromFilter(t.Filter), newCategory);
+                    PrefabUtility.RecordPrefabInstancePropertyModifications(t);
+                }
             }
 
             EditorGUI.BeginChangeCheck();
             var newMask = EditorGUILayout.MaskField("Collides with", ObiUtils.GetMaskFromFilter(emitter.Filter), ObiUtils.categoryNames);
             if (EditorGUI.EndChangeCheck())
             {
-                Undo.RecordObject(emitter, "Set collision mask");
-                emitter.Filter = ObiUtils.MakeFilter(newMask, ObiUtils.GetCategoryFromFilter(emitter.Filter));
+                foreach (ObiEmitter t in targets)
+                {
+                    Undo.RecordObject(t, "Set collision mask");
+                    t.Filter = ObiUtils.MakeFilter(newMask, ObiUtils.GetCategoryFromFilter(t.Filter));
+                    PrefabUtility.RecordPrefabInstancePropertyModifications(t);
+                }
             }
 
             EditorGUILayout.PropertyField(emissionMethod, new GUIContent("Emission method"));

@@ -12,7 +12,7 @@ namespace Obi
         public Mesh mesh;
         public Vector3 scale = Vector3.one;
 
-		public override void GenerateDistribution(){
+        public override void GenerateDistribution(){
 
 			distribution.Clear();
 
@@ -24,18 +24,17 @@ namespace Obi
 
             // Voxelize mesh:
             MeshVoxelizer voxelizer = new MeshVoxelizer(mesh, voxelSize);
-            voxelizer.Voxelize(scale);
-
-            MeshVoxelizer.Voxel[,,] voxels = voxelizer.voxels;
+            var coroutine = voxelizer.Voxelize(Matrix4x4.Scale(scale));
+            while (coroutine.MoveNext()) { }
 
             // Create one distribution point at the center of each volume/surface voxel:
-            for (int x = 0; x < voxels.GetLength(0); ++x)
-                for (int y = 0; y < voxels.GetLength(1); ++y)
-                    for (int z = 0; z < voxels.GetLength(2); ++z)
-                        if (voxels[x, y, z] != MeshVoxelizer.Voxel.Outside)
+            for (int x = 0; x < voxelizer.resolution.x; ++x)
+                for (int y = 0; y < voxelizer.resolution.y; ++y)
+                    for (int z = 0; z < voxelizer.resolution.z; ++z)
+                        if (voxelizer[x, y, z] != MeshVoxelizer.Voxel.Outside)
                         {
                             Vector3 pos = new Vector3(voxelizer.Origin.x + x + 0.5f, voxelizer.Origin.y + y + 0.5f, voxelizer.Origin.z + z + 0.5f) * voxelSize;
-                            distribution.Add(new ObiEmitterShape.DistributionPoint(pos, Vector3.forward));
+                            distribution.Add(new DistributionPoint(pos, Vector3.forward));
                         }
             
         }

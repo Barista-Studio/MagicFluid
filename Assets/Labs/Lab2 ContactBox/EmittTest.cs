@@ -1,18 +1,21 @@
 using Obi;
 using UnityEngine;
-public class EmittTest : MonoBehaviour
+namespace Labs.Lab2_ContactBox
 {
-    ObiEmitter emitter;
-    // Start is called before the first frame update
-    void Start()
+    public class EmittTest : MonoBehaviour
     {
-        emitter = GetComponent<ObiEmitter>();
+        ObiEmitter emitter;
+        // Start is called before the first frame update
+        void Start()
+        {
+            emitter = GetComponent<ObiEmitter>();
 
-    }
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        emitter.EmitParticle( 0, Time.deltaTime );
+        // Update is called once per frame
+        void Update()
+        {
+            emitter.EmitParticle( 0, Time.deltaTime );
+        }
     }
 }

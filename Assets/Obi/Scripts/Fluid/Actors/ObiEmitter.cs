@@ -40,7 +40,7 @@ namespace Obi
         }
 
         [Tooltip("Filter used for collision detection.")]
-        private int filter = ObiUtils.MakeFilter(ObiUtils.CollideWithEverything, 1);
+        [SerializeField] private int filter = ObiUtils.MakeFilter(ObiUtils.CollideWithEverything, 1);
 
         /// <summary>  
         /// Emission method used by this emitter.
